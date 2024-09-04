@@ -49,7 +49,7 @@ def clean_text(input_text):
 
 def store_json(input_text, output_text):
     with open('data.json', 'w') as f:
-        json.dump({'input': input_text, 'output': outpur_text}, f)
+        json.dump({'input': input_text, 'output': output_text}, f)
 
 def process_text(input_text):
     global data
