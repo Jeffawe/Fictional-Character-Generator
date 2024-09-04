@@ -47,6 +47,10 @@ def clean_text(input_text):
     cleaned_text = re.sub(r'[#*]', '', input_text)
     return cleaned_text.strip()
 
+def store_json(input_text, output_text):
+    with open('data.json', 'w') as f:
+        json.dump({'input': input_text, 'output': outpur_text}, f)
+
 def process_text(input_text):
     global data
     data["count"] += 1
@@ -56,6 +60,7 @@ def process_text(input_text):
         model = genai.GenerativeModel("gemini-1.5-flash")
         response = model.generate_content(f"Write an interesting Character Background and name for a character with traits {input_text}")
         if response:
+            store_json(input_text, response.text)   
             return clean_text(response.text)
         else:
             return "There was an issue generating the character. Try again!"
